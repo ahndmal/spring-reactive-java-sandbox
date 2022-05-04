@@ -1,0 +1,7 @@
+server:
+  port: 8088
+spring:
+  datasource:
+    url: "jdbc:postgresql://127.0.0.2/cats"
+    username: dev
+    password: ${DB_PASS}
