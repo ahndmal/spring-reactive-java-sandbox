@@ -1,11 +1,14 @@
 package com.anma.springreactivejl.model;
 
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
 @Table("cats")
 public class Cat {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(value = "cat_id")
     private long catId;
     private String id;
@@ -14,15 +17,19 @@ public class Cat {
     private String breed;
     private String registry;
     private String origin;
-    @Column(value = "country_codes") private String countryCodes;
-    @Column(value = "wikipedia_url") private String wikipediaUrl;
+//    @Column(value = "country_codes")
+    private String countryCodes;
+//    @Column(value = "wikipedia_url")
+    private String wikipediaUrl;
     private int age;
     private int indoor;
     private int adaptability;
-    @Column(value = "dog_friendly") private int dogFriendly;
+//    @Column(value = "dog_friendly")
+    private int dogFriendly;
     private int intelligence;
     private int hairless;
-    @Column(value = "person_id") private long personId;
+//    @Column(value = "person_id")
+    private long personId;
 
     public long getCatId() {
         return catId;

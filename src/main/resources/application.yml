@@ -1,7 +1,8 @@
 server:
   port: 8088
 spring:
-  datasource:
-    url: "jdbc:postgresql://127.0.0.2/cats"
+  r2dbc:
+    url: r2dbc:postgresql://172.17.0.2/cats
     username: dev
     password: ${DB_PASS}
+    name: cats
