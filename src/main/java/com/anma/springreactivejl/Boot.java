@@ -1,5 +1,6 @@
 package com.anma.springreactivejl;
 
+import com.anma.springreactivejl.srv.CatRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -15,9 +16,11 @@ public class Boot implements CommandLineRunner {
 
     Logger log = LoggerFactory.getLogger(Boot.class);
     private final DatabaseClient databaseClient;
+    private final CatRepo catRepo;
 
-    public Boot(DatabaseClient databaseClient) {
+    public Boot(DatabaseClient databaseClient, CatRepo catRepo) {
         this.databaseClient = databaseClient;
+        this.catRepo = catRepo;
     }
 
 //    @Bean
@@ -35,13 +38,14 @@ public class Boot implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        loadData();
+        catRepo.findAll().doOnNext(System.out::println).subscribe();
+//        loadData();
     }
 
     private void loadData() {
 //        databaseClient.insert().into(MyCat.class).table("cats").using(new MyCat(5, "")).then().subscribe();
         Flux.create(sink -> {
-            for (int i = 0; i < 200; i++) {
+            for (int i = 0; i < 500; i++) {
                 var name = "Cat " +i;
                 databaseClient.sql("insert into cats (age, name) values (" +
                         ThreadLocalRandom.current().nextInt(1,10) + ",'" + name + "');")
@@ -51,6 +55,8 @@ public class Boot implements CommandLineRunner {
             }
             sink.complete();
         }).doOnNext(System.out::println).subscribe();
+
+
     }
 }
 

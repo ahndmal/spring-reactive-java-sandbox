@@ -1,15 +1,11 @@
-package com.anma.springreactivejl.model;
+package com.anma.springreactivejl.model.web;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CatWeb {
 
-@Table("cats")
-public class Cat {
-
-    @Id
-    @Column(value = "cat_id")
     private long catId;
     private String id;
     private String name;
@@ -17,41 +13,15 @@ public class Cat {
     private String breed;
     private String registry;
     private String origin;
-//    @Column(value = "country_codes")
+    @JsonProperty(value = "country_codes")
     private String countryCodes;
-//    @Column(value = "wikipedia_url")
-    private String wikipediaUrl;
+    @JsonProperty(value = "wikipedia_url") private String wikipediaUrl;
     private int age;
     private int indoor;
     private int adaptability;
-//    @Column(value = "dog_friendly")
-    private int dogFriendly;
+    @JsonProperty(value = "dog_friendly") private int dogFriendly;
     private int intelligence;
     private int hairless;
-//    @Column(value = "person_id")
-    private long personId;
-
-    @Override
-    public String toString() {
-        return "Cat{" +
-                "catId=" + catId +
-                ", id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                ", breed='" + breed + '\'' +
-                ", registry='" + registry + '\'' +
-                ", origin='" + origin + '\'' +
-                ", countryCodes='" + countryCodes + '\'' +
-                ", wikipediaUrl='" + wikipediaUrl + '\'' +
-                ", age=" + age +
-                ", indoor=" + indoor +
-                ", adaptability=" + adaptability +
-                ", dogFriendly=" + dogFriendly +
-                ", intelligence=" + intelligence +
-                ", hairless=" + hairless +
-                ", personId=" + personId +
-                '}';
-    }
 
     public long getCatId() {
         return catId;
@@ -171,13 +141,5 @@ public class Cat {
 
     public void setHairless(int hairless) {
         this.hairless = hairless;
-    }
-
-    public long getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(long personId) {
-        this.personId = personId;
     }
 }
