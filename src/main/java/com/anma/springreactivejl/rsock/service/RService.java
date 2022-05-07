@@ -20,7 +20,9 @@ public record RService() {
 
     @EventListener(ApplicationReadyEvent.class)
     public void ready() {
+
         final Logger log = LoggerFactory.getLogger(RService.class);
+
         var transport = TcpServerTransport.create(InetSocketAddress.createUnresolved("localhost", 7766));
         var socket = new RSocket() {
 

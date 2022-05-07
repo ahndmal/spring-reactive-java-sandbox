@@ -75,7 +75,6 @@
 <!--            <artifactId>spring-cloud-starter-contract-verifier</artifactId>-->
 <!--            <scope>test</scope>-->
 <!--        </dependency>-->
-
         <dependency>
             <groupId>io.rsocket</groupId>
             <artifactId>rsocket-transport-netty</artifactId>
