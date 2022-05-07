@@ -22,10 +22,10 @@ public class CatHandlerFunction implements HandlerFunction<ServerResponse> {
 
     @Override
     public Mono<ServerResponse> handle(ServerRequest request) {
-        return ServerResponse.ok().syncBody("Hodor!");
+        return ServerResponse.ok().syncBody("Murz cat here!");
     }
 
-    public Flux<Cat> cats(ServerRequest request) {
-        return catRepo.findAll();
+    public Mono<ServerResponse> cats(ServerRequest request) {
+        return ServerResponse.ok().bodyValue(catRepo.findAll().blockFirst());
     }
 }

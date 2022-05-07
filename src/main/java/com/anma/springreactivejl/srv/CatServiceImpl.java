@@ -3,17 +3,24 @@ package com.anma.springreactivejl.srv;
 import com.anma.springreactivejl.model.Cat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.support.TransactionTemplate;
+import reactor.core.publisher.Mono;
 
-import javax.sql.DataSource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CatServiceImpl implements CatService {
 
-    @Override
-    public List<Cat> allCats() {
+    private final CatRepo catRepo;
 
-        return null;
+    @Autowired
+    public CatServiceImpl(CatRepo catRepo) {
+        this.catRepo = catRepo;
+    }
+
+    @Override
+    public Mono<List<Cat>> allCats() {
+
+        return catRepo.findAll().collect(Collectors.toList());
     }
 }

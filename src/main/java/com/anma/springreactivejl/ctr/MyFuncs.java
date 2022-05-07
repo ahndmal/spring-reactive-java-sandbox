@@ -19,7 +19,7 @@ public class MyFuncs {
                     var msg = String.format("Hello %s", pathVar);
                     return ServerResponse.ok().bodyValue(msg);
                 })
-                .GET("/cats", req -> ServerResponse.ok().bodyValue(handler.cats(req).map(Cat::getName)))
+                .GET("/cats", req -> ServerResponse.ok().bodyValue(handler.cats(req)))
                 .build();
     }
 }

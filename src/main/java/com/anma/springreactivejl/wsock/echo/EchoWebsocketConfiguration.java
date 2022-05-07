@@ -27,7 +27,7 @@ class EchoWebsocketConfiguration {
     WebSocketHandler echoWsh() {
         return session -> {
 
-            Flux<WebSocketMessage> out = IntervalMessageProducer //
+            Flux<WebSocketMessage> out = IntervalMessageProducer
                     .produce() //
                     .doOnNext(log::info) //
                     .map(session::textMessage) // <4>
