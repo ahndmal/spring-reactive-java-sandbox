@@ -19,7 +19,7 @@ public record Ping(BootifulProperties properties) {
     @EventListener(ApplicationReadyEvent.class)
     public void ready() {
 
-        var socket = RSocketConnector//
+        var socket = RSocketConnector
                 .create()
                 .reconnect(Retry.backoff(50, Duration.ofMillis(500)))
                 .connect(TcpClientTransport.create(this.properties.getHost(),
@@ -31,5 +31,6 @@ public record Ping(BootifulProperties properties) {
                 .map(Payload::getDataUtf8)//
                 .take(10)
                 .subscribe();
+
     }
 }
