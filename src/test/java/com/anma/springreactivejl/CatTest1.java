@@ -44,7 +44,7 @@ public class CatTest1 {
             var integer = new AtomicInteger();
             Assertions.assertNotNull(integerFluxSink);
             while (integer.get() < count) {
-                var random = Math.random();
+                double random = Math.random();
                 integerFluxSink.next(integer.incrementAndGet());// <4>
                 this.sleep((long) (random * 1_000));
             }

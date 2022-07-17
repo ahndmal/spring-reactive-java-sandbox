@@ -4,7 +4,6 @@ import jdk.dynalink.StandardOperation;
 import org.springframework.util.FileCopyUtils;
 
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.AsynchronousFileChannel;
@@ -26,7 +25,6 @@ public class MyReader implements CompletionHandler<Integer, ByteBuffer> {
     public void completed(Integer result, ByteBuffer attachment) {
 
         try {
-
             AsynchronousFileChannel.open(Path.of("/home/andrii/docs"), Collections.singleton(StandardOpenOption.READ), this.executorService);
             ByteBuffer byteBuffer = ByteBuffer.allocate(FileCopyUtils.BUFFER_SIZE);
             fileChannel.read(byteBuffer, position, byteBuffer, this);

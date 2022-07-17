@@ -20,6 +20,7 @@ public class MyFuncs {
                     return ServerResponse.ok().bodyValue(msg);
                 })
                 .GET("/cats", req -> ServerResponse.ok().bodyValue(handler.cats(req)))
+                .GET("/dogs", req -> ServerResponse.status(200).bodyValue("DOGS!"))
                 .build();
     }
 }
