@@ -22,7 +22,9 @@ public class CatHandlerFunction implements HandlerFunction<ServerResponse> {
 
     @Override
     public Mono<ServerResponse> handle(ServerRequest request) {
-        return ServerResponse.ok().syncBody("Murz cat here!");
+        var method = request.method();
+        String methName = method.name();
+        return ServerResponse.ok().bodyValue("Murz cat here!");
     }
 
     public Mono<ServerResponse> cats(ServerRequest request) {

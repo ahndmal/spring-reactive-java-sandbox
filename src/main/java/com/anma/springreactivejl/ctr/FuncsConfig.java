@@ -2,6 +2,7 @@ package com.anma.springreactivejl.ctr;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.server.RequestPredicate;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
@@ -17,8 +18,8 @@ public class FuncsConfig {
     @Bean
     RouterFunction<ServerResponse> nested(NestedHandler nestedHandler) {
 
-        var jsonRP = accept(APPLICATION_JSON).or(accept(APPLICATION_JSON_UTF8));
-        var sseRP = accept(TEXT_EVENT_STREAM);
+        var jsonRP = accept(APPLICATION_JSON).or(accept(APPLICATION_XML));
+        RequestPredicate sseRP = accept(TEXT_EVENT_STREAM);
 
         return route()
                 .nest(path("/nested"), builder -> builder

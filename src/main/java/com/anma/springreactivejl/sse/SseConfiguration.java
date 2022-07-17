@@ -26,13 +26,13 @@ public class SseConfiguration {
                 .build();
     }
 
-    Mono<ServerResponse> handleSse(ServerRequest r) {
-        var countPathVariable = Integer.parseInt(r.pathVariable(this.countPathVariable));
+    Mono<ServerResponse> handleSse(ServerRequest req) {
+        int countPathVariable = Integer.parseInt(req.pathVariable(this.countPathVariable));
         var publisher = IntervalMessageProducer.produce(countPathVariable).doOnComplete(() -> log.info("completed"));
 
-        return ServerResponse //
-                .ok() //
-                .contentType(MediaType.TEXT_EVENT_STREAM) // <1>
+        return ServerResponse
+                .ok()
+                .contentType(MediaType.TEXT_EVENT_STREAM)
                 .body(publisher, String.class);
 
     }
