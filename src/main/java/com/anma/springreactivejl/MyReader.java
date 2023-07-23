@@ -5,7 +5,6 @@ import org.springframework.util.FileCopyUtils;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.nio.channels.AsynchronousFileChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.file.Path;
@@ -15,7 +14,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MyReader implements CompletionHandler<Integer, ByteBuffer> {
-
     private AsynchronousFileChannel fileChannel;
     private Runnable finished;
     private ExecutorService executorService = Executors.newFixedThreadPool(10);

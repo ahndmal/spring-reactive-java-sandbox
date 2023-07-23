@@ -10,7 +10,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
-import reactor.netty.tcp.TcpServer;
 import io.rsocket.transport.netty.server.TcpServerTransport;
 
 import java.net.InetSocketAddress;
@@ -20,8 +19,7 @@ public record RService() {
 
     @EventListener(ApplicationReadyEvent.class)
     public void ready() {
-
-        final Logger log = LoggerFactory.getLogger(RService.class);
+        final Logger LOG = LoggerFactory.getLogger(RService.class);
 
         var transport = TcpServerTransport.create(InetSocketAddress.createUnresolved("localhost", 7766));
         var socket = new RSocket() {
@@ -29,7 +27,7 @@ public record RService() {
             @Override
             public Mono<Void> fireAndForget(Payload payload) {
                 var request = payload.getDataUtf8();
-                log.info("received " + request);
+                LOG.info("received " + request);
                 return Mono.empty();
             }
         };
@@ -37,7 +35,7 @@ public record RService() {
         var socketAcceptor = SocketAcceptor.with(socket);
         RSocketServer.create(socketAcceptor)
                 .bind(transport)
-                .doOnNext(cc -> log.info("server started on " + cc.address()))
+                .doOnNext(cc -> LOG.info("server started on " + cc.address()))
                 .block();
     }
 }

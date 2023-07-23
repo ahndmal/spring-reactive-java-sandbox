@@ -17,8 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class Boot implements CommandLineRunner {
-
-    Logger log = LoggerFactory.getLogger(Boot.class);
+    private final Logger log = LoggerFactory.getLogger(Boot.class);
     private final DatabaseClient databaseClient;
     private final R2dbcEntityTemplate entityTemplate;
     private final CatRepo catRepo;
@@ -96,7 +95,6 @@ public class Boot implements CommandLineRunner {
         }).doOnNext(System.out::println).subscribe();
 
         // END
-
     }
 
     private void loadDataWithSql(Cat cat) {
